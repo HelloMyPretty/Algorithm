@@ -1,0 +1,35 @@
+
+public class Sieve {
+	static int maxn=(int)1e5+5;
+	static boolean vis[]=new boolean[maxn];
+	static int prime[]=new int[maxn];//也可以用ArrayList代替
+	static int tot=0;
+	static void sieve() {
+		for(int i=2;i<maxn;i++) {
+			if(!vis[i]) prime[tot++]=i;
+			for(int j=0;j<tot&&i*prime[j]<maxn;j++) {
+				vis[i*prime[j]]=true;
+				if(i%prime[j]==0) break;
+			}
+		}
+	}
+	
+	static void addInteger(int n,int d,int exponent[]) {
+		//可以计算一个分式的 唯一分解式,首先用素数打表
+		// d=1时表示n为分子，d=-1时表示n为分母
+		//exponent存储各素数的指数
+		
+		for(int i=0;i<prime.length;i++) {
+			while(n%prime[i]==0) {
+				n/=prime[i];
+				exponent[i]+=d;
+			}
+			if(n==1) break;
+		}
+	}
+	
+	public static void main(String[] args) {
+		sieve();
+		for(int i=0;i<10;i++) System.out.println(prime[i]);
+	}
+}

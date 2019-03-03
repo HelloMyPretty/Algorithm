@@ -1,0 +1,21 @@
+
+public class Sieve {
+	static int maxn=(int)1e5+5;
+	static boolean vis[]=new boolean[maxn];
+	static int prime[]=new int[maxn];
+	static int tot=0;
+	static void sieve() {
+		for(int i=2;i<maxn;i++) {
+			if(!vis[i]) prime[tot++]=i;
+			for(int j=0;j<tot&&i*prime[j]<maxn;j++) {
+				vis[i*prime[j]]=true;
+				if(i%prime[j]==0) break;
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		sieve();
+		for(int i=0;i<10;i++) System.out.println(prime[i]);
+	}
+}

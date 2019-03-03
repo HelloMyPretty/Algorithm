@@ -1,0 +1,43 @@
+import java.util.Arrays;
+
+public class Gragh {
+	static int maxn = 105;
+	static int t, n, m;
+	static int G[][] = new int[maxn][maxn]; // 存储有向图
+	static int topo[] = new int[maxn]; // 拓扑序列
+	static int vis[] = new int[maxn]; // 标记该节点状态
+	// v[i]=0,该节点尚未被访问；
+	// v[i]=1该节点已经被访问，并且还完成了该节点的dfs(i)
+	// v[i]=-1表示该节点正在被访问。 这些标志可以用来判断图中是否有环
+
+	static boolean dfs(int u) {
+		vis[u] = -1; // 标记当前结点正在被访问
+		for (int v = 1; v <= n; v++) {
+			if (G[u][v] == 1) {
+				if (vis[v] < 0) // 从结点u出发存在有向环
+					return false;
+				else if (vis[v] == 0 && !dfs(v)) // 从结点v出发有无相环
+					return false;
+			}
+		}
+
+		vis[u] = 1; // 标记该节点已经完成dfs(u);
+		topo[t--] = u; // 回溯法，因此是首部添加！！！
+		return true;
+	}
+
+	static boolean toposort() {
+		// 构造拓扑序列
+		// 判断有向图中是否有环
+		t = n;
+		Arrays.fill(vis, 0);
+		for (int u = 1; u <= n; u++) // 假设图的结点编号从1开始
+		{
+			if (vis[u] == 0) {
+				if (!dfs(u))
+					return false;
+			}
+		}
+		return true;
+	}
+}

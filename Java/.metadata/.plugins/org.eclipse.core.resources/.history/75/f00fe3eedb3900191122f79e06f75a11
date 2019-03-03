@@ -1,0 +1,80 @@
+
+public class MyMath {
+	static long GCD(long a, long b) {
+		return b == 0 ? a : GCD(b, a % b);
+	}
+
+	static long lcm(long a, long b) {
+		return a / GCD(a, b) * b;
+	}
+
+	static int qGCD(int a, int b) {
+		if (a == 0)
+			return b;
+		if (b == 0)
+			return a;
+		if ((a & 1) == 0 && 0 == (b & 1))
+			return qGCD(a >> 1, b >> 1) << 1;
+		else if ((b & 1) == 0)
+			return qGCD(a, b >> 1);
+		else if ((a & 1) == 0)
+			return qGCD(a >> 1, b);
+		else
+			return qGCD(Math.abs(a - b), Math.min(a, b));
+	}
+
+	static long allgcd(long arr[]) {
+		int n = arr.length;
+		long e, gcd, k;
+		k = gcd = 1;
+		for (int i = 0; i < n; i++) {
+			e = arr[i];
+			gcd = k / GCD(e, k) * e;
+			k = gcd;
+		}
+		return gcd;
+	}
+
+	static int d, x, y;
+
+	static void exgcd(int a, int b) {
+		if (b == 0) {
+			d = a;
+			x = 1;
+			y = 0;
+			return;
+		} else {
+			exgcd(b, a % b);
+			y -= x * (a / b);
+		}
+	}
+
+	public static void main(String[] args) {
+		int a = 3, b = 4, c = 5;
+		// ax+by=c
+		exgcd(a, b);
+		if (c % d != 0) {
+			System.out.println("无解");
+			return;
+		}
+		System.out.println("有解");
+		System.out.println("最大公约数: "+d);
+		// 特解
+		y = y * (c / d);
+		x = x * (c / d);
+		System.out.println("特解:x= " + x + " y=" + y);
+
+		// 全解
+		int r, t;
+		r = a / d;
+		t = b / d;
+		System.out.println("全解:");
+		for (int i = 0; i < d; i++)
+			System.out.println("x=" + (x - i * t) + " y=" + (y + i * r));
+
+		// 最小整数解
+		x = (x % t + t) % t;
+		System.out.println("最小整数解：x=" + x + " y=" + (c - (a * x)) / b);
+
+	}
+}

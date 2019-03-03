@@ -1,0 +1,39 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
+import javax.xml.xpath.XPath;
+
+public class Gragh {
+	static int maxn = 10000;
+	static int n, m; // n条边，m个顶点
+	static int u[] = new int[maxn], v[] = new int[maxn], w[] = new int[maxn];// 无向图的边，以及其权值
+	static int p[] = new int[maxn]; // 用于并查集
+	static Integer r[] = new Integer[maxn];  	// 根据权值间接排序，第i小的边的序号保存再r[i]中
+												//注意一定要定义为Integer类，因为Java只能对引用类型
+												//使用自定义比较器排序
+	
+	//简介比较的比较器
+	static Comparator<Integer> comparator = new Comparator<Integer>() {
+		@Override
+		public int compare(Integer o1, Integer o2) {
+			return Integer.compare(w[o1], w[o2]);
+		}
+	};
+	static int find(int x) {
+		if (p[x] == x)
+			return x;
+		else {
+			return p[x] = find(p[x]);
+		}
+	}
+
+	static int Kruskal() {
+		static int ans = 0;
+		for (Integer i : p)
+			p[i] = i;
+		for (Integer i : r)
+			p[i] = i;
+		Arrays.sort(r, 0, m, comparator);
+
+	}
+}

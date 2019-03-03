@@ -1,0 +1,13 @@
+import java.util.Calendar;
+
+public class Data {
+	public static void main(String[] args) {
+		Calendar from = Calendar.getInstance();
+		Calendar to = Calendar.getInstance();
+		from.set(2019, 2, 1);
+		to.set(2019, 2, 30);
+		
+		long dis=(to.getTimeInMillis()-from.getTimeInMillis())/(24*60*60*1000);
+		System.out.println("How many days between:2019-2-27 with 2019-1-1 "+dis);
+	}
+}

@@ -1,0 +1,12 @@
+
+public class FloydWarshell {
+	static int maxn;
+	int dis[][]=new int[maxn][maxn];		//È¨Öµ¾ØÕó
+	int gra[][]=new int[maxn][maxn];		//ÁÚ½Ó¾ØÕó
+	int path[][]=new int[maxn][maxn];
+	int n;
+	void floyd() {
+		for(int i=0;i<n;i++)
+	}
+	
+}
