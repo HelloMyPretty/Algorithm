@@ -1,7 +1,0 @@
-
-public class Dijkstra {
-	static int maxn=10000;
-	static class Edge{			//´æ´¢±ßµÄÐÅÏ¢
-		int from,to,w;
-	}
-}
